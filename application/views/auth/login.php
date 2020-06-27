@@ -15,12 +15,14 @@
                     <h1 class="h4 text-gray-900 mb-4">Login Page</h1>
                   </div>
                   <?= $this->session->flashdata('message');?>
-                  <form class="user">
+                  <form class="user" action = "<?=base_url('auth/index')?>" method = "POST" >
                     <div class="form-group">
-                      <input type="text" class="form-control form-control-user" id="email" name = "email" placeholder="Enter Email Address...">
+                      <input type="text" class="form-control form-control-user" id="email" name = "user_email" placeholder="Enter Email Address..." value = "<?= set_value('user_email');?>">
+                      <?= form_error('user_email', '<small class = "text-danger pl-3">', '</small>');?>
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control form-control-user" id="password" name = "password" placeholder="Password">
+                      <input type="password" class="form-control form-control-user" id="password" name = "user_password" placeholder="Password">
+                      <?= form_error('user_password', '<small class = "text-danger pl-3">', '</small>');?>
                     </div>
                     <button type = "submit" class="btn btn-primary btn-user btn-block">
                       Login
