@@ -1,14 +1,14 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Admin extends CI_Controller {
     public function index(){
         $data['user'] = $this->db->get_where('user', ['user_email' => $this->session->userdata('user_email')])->row_array();
-        $data['title'] = "Profile Page";
+        $data['title'] = "Dashboard Page";
         $this->load->view('templates/header', $data);
         $this->load->view('templates/sidebar', $data);
         $this->load->view('templates/topbar', $data);
-        $this->load->view('user/index', $data);
+        $this->load->view('admin/index', $data);
         $this->load->view('templates/footer', $data);
     }
 

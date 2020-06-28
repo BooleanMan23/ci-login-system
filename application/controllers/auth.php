@@ -42,7 +42,12 @@ class Auth extends CI_Controller {
                                 'role_id' => $user['role_id'],
                         ];
                         $this->session->set_userdata($data);
-                        redirect('user');
+                        if($user['role_id'] == 1){
+                                redirect('admin');
+                        }else{
+                                redirect('user');
+                        }
+                       
                         }else {
                                 $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">
                                Password incorrect!
@@ -71,7 +76,7 @@ class Auth extends CI_Controller {
         {
            
            $this->form_validation->set_rules('user_name', 'Name', 'required|trim');
-           $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email|is_unique[user.user_email] ');
+           $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email|is_unique[user.user_email]',['is_unique' => 'Email has already taken!']);
            $this->form_validation->set_rules('user_password1', 'Password', 'required|trim|min_length[3]|matches[user_password2]', ['matches' => 'Password dont match!', 'min_length'=>'Password too short!']);
            $this->form_validation->set_rules('user_password2', 'Password', 'required|trim|matches[user_password1]');
 
@@ -85,7 +90,7 @@ class Auth extends CI_Controller {
                         $data = [
                                 'user_name' => htmlspecialchars($this->input->post('user_name', true)),
                                 'user_email' => htmlspecialchars($this->input->post('user_email', true)),
-                                'user_image' => 'default.jpg',
+                                'user_image' => 'default.png',
                                 'user_password' => password_hash($this->input->post('user_password1'), PASSWORD_DEFAULT),
                                 'role_id'=> 2,
                                 'user_active' =>1,
