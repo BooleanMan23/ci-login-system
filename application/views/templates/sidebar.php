@@ -42,7 +42,11 @@ $menuId = $menu['id'];
   $subMenu = $this->db->query($querySubMenu)->result_array();
 ?>
   <?php foreach($subMenu as $subMenu) : ?>
-    <li class="nav-item">
+    <?php  if($title == $subMenu['title']) : ?>
+    <li class="nav-item active">
+      <?php else : ?>
+        <li class="nav-item ">
+      <?php endif; ?>
       <a class="nav-link" href="<?= base_url($subMenu['url']);?>">
         <i class="<?= $subMenu['icon']; ?>"></i>
         <span><?= $subMenu['title']?></span></a>
