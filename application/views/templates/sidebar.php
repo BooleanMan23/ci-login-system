@@ -47,12 +47,12 @@ $menuId = $menu['id'];
       <?php else : ?>
         <li class="nav-item ">
       <?php endif; ?>
-      <a class="nav-link" href="<?= base_url($subMenu['url']);?>">
+      <a class="nav-link pb-0" href="<?= base_url($subMenu['url']);?>">
         <i class="<?= $subMenu['icon']; ?>"></i>
         <span><?= $subMenu['title']?></span></a>
     </li>
   <?php endforeach; ?>
-  <hr class="sidebar-divider">
+  <hr class="sidebar-divider mt-3">
 <?php endforeach; ?>
 
 
