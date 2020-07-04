@@ -7,11 +7,15 @@ class Auth extends CI_Controller {
         {
           parent::__construct();
           $this->load->library('form_validation');
-          $this->load->model('user_model');    
+          $this->load->model('user_model');   
+        
         }
 
 	public function index()
         {      
+                if($this->session->userdata('user_email')){
+                        redirect('user');
+                } 
                 $this->form_validation->set_rules('user_email', 'Email', 'trim|required|valid_email');
                 $this->form_validation->set_rules('user_password', 'Email', 'trim|required');
                 if($this->form_validation->run() == false){
@@ -74,7 +78,9 @@ class Auth extends CI_Controller {
 
         public function register()
         {
-           
+                if($this->session->userdata('user_email')){
+                        redirect('user');
+                } 
            $this->form_validation->set_rules('user_name', 'Name', 'required|trim');
            $this->form_validation->set_rules('user_email', 'Email', 'required|trim|valid_email|is_unique[user.user_email]',['is_unique' => 'Email has already taken!']);
            $this->form_validation->set_rules('user_password1', 'Password', 'required|trim|min_length[3]|matches[user_password2]', ['matches' => 'Password dont match!', 'min_length'=>'Password too short!']);
